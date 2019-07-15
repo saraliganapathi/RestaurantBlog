@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<h1>{{ restaurant.name }}</h1>
+
+<h4>Address:</h4>
+<p >  {{ restaurant.street }}, {{ restaurant.number }} <br/>
+    {{ restaurant.zipcode }} {{ restaurant.city }} <br/>
+    {{ restaurant.stateOrProvince }}<br/>
+    {{ restaurant.country }}
+  
+  </p>
+<h4>Cuisine: {{restaurant.category}}</h4>
+<h5>{{ restaurant.review_set.count }} reviews </h5>
+
+
+
+<h3>Reviews</h3>
+
+{% if restaurant.review_set.all %}
+ <ul>
+    {% for review in restaurant.review_set.all %}
+    <li>
+    
+       <P>{{ review.rating }} star{{review.rating|pluralize}} </P>
+       <p>Comment: {{ review.comment }}</p> 
+       <p>Created by {{ review.user_name }} on {{review.pub_date}}</p>
+    </li>   
+       
+{% endfor %}
+  </ul>
+{% else %}
+<p>No reviews yet.Be the first one to add review</p>
+{% endif %}
+
+<h3>Add Review</h3>
+
+
+<form action="{% url 'restaurantblog:review_create' restaurant.id %}" method="post"> 
+    {% csrf_token %}
+  <p>Describe Your Experience :
+   <textarea name="comment" id="comment" rows="4"></textarea></p>
+   <p>Give your name   <textarea name="user_name" id="user_name" rows="1"></textarea></p></p>
+   <p>Give your Rating
+  
+  <ul>
+  <li> <p> 1 Star:  <input type="radio" name="rating" id="rating" value="1" /></p> </li>
+  <li><p> 2 Stars:   <input type="radio" name="rating" id="rating" value="2" /> </p></li> 
+  <li> <p> 3 Stars: <input type="radio" name="rating" id="rating" value="3" /></p> </li>
+  <li> <p> 4 Stars: <input type="radio" name="rating" id="rating" value="4" /></p></li>
+  <li>  <p> 5 Stars: <input type="radio" name="rating" id="rating" value="5" /> </p></li>
+    </ul>
+</p>
+    <br/>
+
+     
+    
+     <input type="submit" value ="Post Review" />
+
+   
+    
+   
+</form>
+{% endblock %}
+{% block footer %}
+created by {{restaurant.user}} on {{restaurant.date}}
+
+{% endblock %}

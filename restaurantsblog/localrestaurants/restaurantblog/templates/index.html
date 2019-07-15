@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="color:blue"> RestaurantBlog </h1>
+
+<p>Welcome to <em> RestaurantBlog</em>, where users get to know the restaurants in your area with their rating and comment son the restaturant which help the individuals to have a better view on their desired restaurant without even going their with the help of the other reviewers</p>
+
+
+<p>The RestaurantBlog has the following record counts:</p>
+<ul>
+<li><strong>restaturant:</strong> {{ num_restaurants }}</li>
+<li><strong>Cusinies:</strong> {{ num_cusines }}</li>
+
+</ul>
+
+
+You have visited this page {{ num_visits }} times.
+
+{% endblock %}

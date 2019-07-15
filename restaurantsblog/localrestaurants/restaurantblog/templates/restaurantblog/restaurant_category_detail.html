@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h2 style="text-align: center">Restaurants with your choosen cuisine</h2>
+
+
+ 
+
+
+{% endblock %}
+{% block content %}
+{% if restaurant_category_detail %}
+<div class="row">
+    {% for restaurant_category in restaurant_category_detail %}
+    <div class="col-xs-6 col-lg-4">
+        <h4>
+        {{ restaurant_category.name }}
+        </a></h4>
+        
+       
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No Restaurants are available for this cuisine.</p>
+    <p>we are sorry</p>
+{% endif %}
+
+
+
+{% endblock %}
